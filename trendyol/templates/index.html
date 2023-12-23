@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="custom-buttons ms-auto"> 
+        
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Trendyol</a>
+
+    <div class="center-search flex-grow-1">
+      <!-- <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-warning" type="submit" >
+          <i class="bi bi-search"><?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg height="25px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="30px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M344.5,298c15-23.6,23.8-51.6,23.8-81.7c0-84.1-68.1-152.3-152.1-152.3C132.1,64,64,132.2,64,216.3  c0,84.1,68.1,152.3,152.1,152.3c30.5,0,58.9-9,82.7-24.4l6.9-4.8L414.3,448l33.7-34.3L339.5,305.1L344.5,298z M301.4,131.2  c22.7,22.7,35.2,52.9,35.2,85c0,32.1-12.5,62.3-35.2,85c-22.7,22.7-52.9,35.2-85,35.2c-32.1,0-62.3-12.5-85-35.2  c-22.7-22.7-35.2-52.9-35.2-85c0-32.1,12.5-62.3,35.2-85c22.7-22.7,52.9-35.2,85-35.2C248.5,96,278.7,108.5,301.4,131.2z"/></svg></i> 
+        </button> -->
+        <form class="d-flex" method="post" action="{{ url_for('search') }}">
+            <input class="form-control me-2" type="search" name="search_query" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-warning" type="submit">
+                <i class="bi bi-search"><?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg height="25px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="30px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M344.5,298c15-23.6,23.8-51.6,23.8-81.7c0-84.1-68.1-152.3-152.1-152.3C132.1,64,64,132.2,64,216.3  c0,84.1,68.1,152.3,152.1,152.3c30.5,0,58.9-9,82.7-24.4l6.9-4.8L414.3,448l33.7-34.3L339.5,305.1L344.5,298z M301.4,131.2  c22.7,22.7,35.2,52.9,35.2,85c0,32.1-12.5,62.3-35.2,85c-22.7,22.7-52.9,35.2-85,35.2c-32.1,0-62.3-12.5-85-35.2  c-22.7-22.7-35.2-52.9-35.2-85c0-32.1,12.5-62.3,35.2-85c22.7-22.7,52.9-35.2,85-35.2C248.5,96,278.7,108.5,301.4,131.2z"/></svg></i> <!-- Magnifying glass icon -->
+
+            </button>
+      </form>
+    </div>
+
+    <div class="d-flex">
+      <button class="btn btn-outline-warning me-2">Giriş Yap</button>
+      <button class="btn btn-outline-warning me-2">Favorilerim</button>
+      <button class="btn btn-outline-warning">Sepetim</button>
+    </div>
+  </div>
+</nav>
+
+    <div class="container mt-3 custom-buttons" id="alt-buttons">
+        <button class="btn btn-outline-warning"> Kadın</button>
+        <button class="btn btn-outline-warning">Erkek </button>
+        <button class="btn btn-outline-warning">Kadın & Çocuk</button>
+        <button class="btn btn-outline-warning">Ev&Yaşam</button>
+        <button class="btn btn-outline-warning">Süper Market</button>
+        <button class="btn btn-outline-warning">Kozmetik</button>
+        <button class="btn btn-outline-warning">Ayakkabı & Çanta</button>
+        <button class="btn btn-outline-warning">Elektronik</button>
+        <button class="btn btn-outline-warning">Spor&Outdoor</button>
+        <button class="btn btn-outline-warning">Çok Satanlar</button>
+        <button class="btn btn-outline-warning">Flash Ürünler</button>
+    </div>
+
+    <div class="container mt-5" id="bestSeller">
+        {% if search_results %}
+        <div class="col-md-2">
+            <div class="card">
+                <img src="{{ product[4] }}" class="card-img-top" alt="Product Image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product[1] }}</h5>
+                    <p class="card-text">{{ product[2] }}</p>
+                    <p class="card-text">Price: ${{ product[3] }}</p>
+                    <button type="button" class="btn btn-warning" onclick="openDetailPage('{{ product[0] }}')">View</button>
+                </div>
+            </div>
+        </div>
+        <h3>Search Results</h3>
+        <div class="row">
+            {% for product in search_results %}
+            <div class="col-md-2">
+                <div class="card">
+                    <img src="{{ product[4] }}" class="card-img-top" id="card-img" alt="Product Image">
+                    <div class="card-body">
+                        <h1 class="card-title">{{ product[1] }}</h1>
+                        <p class="card-text"><b>{{ product[1] }}</b>,{{ product[2] }}</p>
+                        <div class="price-container">
+                            <p style="color:red;" class="card-text"> {{ product[3] }}TL</p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h3>Çok Satanlar</h3>
+        <div class="row">
+            {% for product in products %}
+                <div class="col-md-2">
+                    <div class="card">
+                        <img src="{{ product[4] }}" class="card-img-top" alt="Product Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product[1] }}</h5>
+                            <p class="card-text">{{ product[2] }}</p>
+                            <p class="card-text">Price: ${{ product[3] }}</p>
+                            <button type="button" class="btn btn-warning" onclick="openDetailPage('{{ product[0] }}')">View</button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+
+    <style>
+
+.navbar {
+    background-color: #fff; 
+  }
+
+  .navbar-brand {
+    color: black; 
+    font-weight: bold;
+  }
+  
+  .form-control {
+   height: 40px;
+   width: 400px;
+  }
+
+  .btn-outline-warning {
+    color: grey; 
+    border-color: transparent;
+  }
+
+  .center-search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  }
+
+  .custom-buttons .btn {
+    color: #000000; 
+    border-color: transparent; 
+    margin-right: 0px; 
+  }
+
+  #alt-buttons{
+    margin:auto;
+  }
+
+  #bestSeller{
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 30px;
+    border-radius: 5px;
+    font-family: italic;
+    background-color: #FFF4E0;
+  }
+
+  .card{
+    margin-bottom: 15px;
+  }
+
+  
+    </style>
+    <script>
+
+
+function openDetailPage(productId) {
+        window.location.href = '/detail/' + productId;
+    }
+    </script>
+  
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
