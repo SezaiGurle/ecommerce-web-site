@@ -70,9 +70,6 @@ def search():
 
         return render_template('search.html', search_results=search_results)
 
-    # # If it's a GET request, you may want to handle it differently (e.g., redirect to the home page)
-    # return redirect(url_for('index'))
-
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
 
